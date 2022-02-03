@@ -31,8 +31,18 @@
 </ul>
 <h3>1.1.2 The Cortex-M processor family</h3>
 <img src="https://user-images.githubusercontent.com/57071897/152416457-e3fa6b5e-4fc6-4a7c-98fa-746cd6d7998d.png"></img>
-<p> Cortex-M0, Cortex-M0þ, and the Cortex-M1 processors are based on
-ARMv6-M, which has a smaller instruction set. The
-Cortex-M0þ processor has the most state-of-the-art low power optimizations, and
-has more available optional features.
+<p> 
+  Cortex-M0, Cortex-M0+, and the Cortex-M1 processors are based on ARMv6-M, which has a smaller instruction set. The Cortex-M0+ processor has the most state-of-the-art low power optimizations, and has more available optional features.
+</p>
+<p>
+  The Cortex-M3 and Cortex-M4 processors are based on ARMv7-M architec-
+ture. Both are high-performance processors that are designed for microcontrollers.
+Because the Cortex-M4 processor has SIMD, fast MAC, and saturate arithmetic in-
+structions, it can also carry out some of the digital signal processing applications
+that traditionally have been carried out by a separate Digital Signal Processor
+(DSP).
+</p>
+<p>
+  The Cortex-M1 processor is designed specifically for FPGA applications. It has
+Tightly Coupled Memory (TCM) features.
 </p>
