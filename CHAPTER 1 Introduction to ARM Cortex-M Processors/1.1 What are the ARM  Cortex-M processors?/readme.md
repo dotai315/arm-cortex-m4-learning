@@ -24,8 +24,11 @@
 </ul>
 <p>In addition, the Cortex-M4 processor also supports:</p>
 <ul>
-  <li>liSingle Instruction Multiple Data (SIMD) operations</li>
-  <li>liAdditional fast MAC and multiply instructions</li>
+  <li>Single Instruction Multiple Data (SIMD) operations</li>
+  <li>Additional fast MAC and multiply instructions</li>
   <li>Saturating arithmetic instructions</li>
   <li>Optional floating point instructions</li>
 </ul>
+<h3>1.1.2 The Cortex-M processor family</h3>
+<img> src="https://user-images.githubusercontent.com/57071897/152416457-e3fa6b5e-4fc6-4a7c-98fa-746cd6d7998d.png"></img>
+
