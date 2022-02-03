@@ -30,5 +30,5 @@
   <li>Optional floating point instructions</li>
 </ul>
 <h3>1.1.2 The Cortex-M processor family</h3>
-<img> src="https://user-images.githubusercontent.com/57071897/152416457-e3fa6b5e-4fc6-4a7c-98fa-746cd6d7998d.png"></img>
+<img src="https://user-images.githubusercontent.com/57071897/152416457-e3fa6b5e-4fc6-4a7c-98fa-746cd6d7998d.png"></img>
 
