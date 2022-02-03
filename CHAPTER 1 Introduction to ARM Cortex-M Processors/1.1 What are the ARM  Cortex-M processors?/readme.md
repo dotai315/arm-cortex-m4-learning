@@ -9,4 +9,23 @@
   <li>NVIC (Nested Vectored Interrupt Controller) up to 240 interrupt requests and from 8 to 256 interrupt priority levels</li>
   <li>Support for various features for OS: SysTick timer, shadowed stack pointer</li>
   <li>Low power features</li>
+  <li>MPU (Memory Protection Unit) </li>
+  <li>Bit-data accesses in two specific memory regions using Bit Band</li>
+  <li>Single processor or multi-processor designs</li>
+</ul>
+<p>The ISA used in Cortex-M3 and Cortex-M4 processors provides a wide range of instructions:</p>
+<ul>
+  <li>General data processing</li>
+  <li>Memory access instructions supporting 8-bit, 16-bit, 32-bit, and 64-bit data</li>
+  <li>Instructions for bit field processing</li>
+  <li>Multiply Accumulate (MAC) and saturate instructions</li>
+  <li>iInstructions for branches, conditional branches and function calls</li>
+  <li>Instructions for system control, OS support, etc.</li>
+</ul>
+<p>In addition, the Cortex-M4 processor also supports:</p>
+<ul>
+  <li>liSingle Instruction Multiple Data (SIMD) operations</li>
+  <li>liAdditional fast MAC and multiply instructions</li>
+  <li>Saturating arithmetic instructions</li>
+  <li>Optional floating point instructions</li>
 </ul>
