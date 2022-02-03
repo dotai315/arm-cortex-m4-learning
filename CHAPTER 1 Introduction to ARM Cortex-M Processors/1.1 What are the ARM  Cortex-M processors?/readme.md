@@ -1,6 +1,5 @@
 <h3>1.1.1 The Cortex-M3 and Cortex-M4 processors</h3> 
-<p> - 32-bit architecture. The Instruction Set Architecture (ISA) is called the Thumb ISA and is based on Thumb-2 Technology which supports a mixture
-of 16-bit and 32-bit instructions.</p>
+<p>32-bit architecture. The Instruction Set Architecture (ISA) is called the Thumb ISA and is based on Thumb-2 Technology which supports a mixture of 16-bit and 32-bit instructions.</p>
 <p>The Cortex-M3 and Cortex-M4 processors have:</p>
 <ul>
   <li>Three-stage pipeline design</li>
