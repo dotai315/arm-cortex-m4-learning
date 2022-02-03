@@ -31,4 +31,8 @@
 </ul>
 <h3>1.1.2 The Cortex-M processor family</h3>
 <img src="https://user-images.githubusercontent.com/57071897/152416457-e3fa6b5e-4fc6-4a7c-98fa-746cd6d7998d.png"></img>
-
+<p> Cortex-M0, Cortex-M0þ, and the Cortex-M1 processors are based on
+ARMv6-M, which has a smaller instruction set. The
+Cortex-M0þ processor has the most state-of-the-art low power optimizations, and
+has more available optional features.
+</p>
