@@ -1,0 +1,322 @@
+ARM GAS  /tmp/cctO5sfu.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"main.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.RCC_Config,"ax",%progbits
+  20              		.align	1
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  25              	RCC_Config:
+  26              	.LFB135:
+  27              		.file 1 "Core/Source/main.c"
+   1:Core/Source/main.c **** #include "stm32f411xe.h"
+   2:Core/Source/main.c **** 
+   3:Core/Source/main.c **** #define PLL_M 	4
+   4:Core/Source/main.c **** #define PLL_N 	84
+   5:Core/Source/main.c **** #define PLL_P 	2
+   6:Core/Source/main.c **** 
+   7:Core/Source/main.c **** static void RCC_Config(void);
+   8:Core/Source/main.c **** static void GPIO_Config (void);
+   9:Core/Source/main.c **** 
+  10:Core/Source/main.c **** int main(void)
+  11:Core/Source/main.c **** {
+  12:Core/Source/main.c ****     RCC_Config();
+  13:Core/Source/main.c ****     GPIO_Config();
+  14:Core/Source/main.c ****     while(1)
+  15:Core/Source/main.c ****     {
+  16:Core/Source/main.c ****         if ((GPIOC->IDR & GPIO_IDR_ID13) == GPIO_IDR_ID13) {
+  17:Core/Source/main.c ****             GPIOA->BSRR |= GPIO_BSRR_BS5;
+  18:Core/Source/main.c ****         } else {
+  19:Core/Source/main.c ****            GPIOA->BSRR |= GPIO_BSRR_BR5; 
+  20:Core/Source/main.c ****         }
+  21:Core/Source/main.c ****     }
+  22:Core/Source/main.c ****     return 0;
+  23:Core/Source/main.c **** }
+  24:Core/Source/main.c **** 
+  25:Core/Source/main.c **** static void RCC_Config(void)
+  26:Core/Source/main.c **** {
+  28              		.loc 1 26 1 view -0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+ARM GAS  /tmp/cctO5sfu.s 			page 2
+
+
+  27:Core/Source/main.c ****     RCC->CR |= RCC_CR_HSEON;
+  33              		.loc 1 27 5 view .LVU1
+  34              		.loc 1 27 13 is_stmt 0 view .LVU2
+  35 0000 1D4A     		ldr	r2, .L5
+  36 0002 1368     		ldr	r3, [r2]
+  37 0004 43F48033 		orr	r3, r3, #65536
+  38 0008 1360     		str	r3, [r2]
+  28:Core/Source/main.c ****     while(!(RCC->CR & RCC_CR_HSERDY));
+  39              		.loc 1 28 5 is_stmt 1 view .LVU3
+  40              	.L2:
+  41              		.loc 1 28 38 discriminator 1 view .LVU4
+  42              		.loc 1 28 10 discriminator 1 view .LVU5
+  43              		.loc 1 28 16 is_stmt 0 discriminator 1 view .LVU6
+  44 000a 1B4B     		ldr	r3, .L5
+  45 000c 1B68     		ldr	r3, [r3]
+  46              		.loc 1 28 10 discriminator 1 view .LVU7
+  47 000e 13F4003F 		tst	r3, #131072
+  48 0012 FAD0     		beq	.L2
+  29:Core/Source/main.c **** 
+  30:Core/Source/main.c ****     RCC->APB1ENR |= RCC_APB1ENR_PWREN;
+  49              		.loc 1 30 5 is_stmt 1 view .LVU8
+  50              		.loc 1 30 18 is_stmt 0 view .LVU9
+  51 0014 184B     		ldr	r3, .L5
+  52 0016 1A6C     		ldr	r2, [r3, #64]
+  53 0018 42F08052 		orr	r2, r2, #268435456
+  54 001c 1A64     		str	r2, [r3, #64]
+  31:Core/Source/main.c **** 	PWR->CR |= PWR_CR_VOS_1;
+  55              		.loc 1 31 2 is_stmt 1 view .LVU10
+  56              		.loc 1 31 10 is_stmt 0 view .LVU11
+  57 001e 1749     		ldr	r1, .L5+4
+  58 0020 0A68     		ldr	r2, [r1]
+  59 0022 42F40042 		orr	r2, r2, #32768
+  60 0026 0A60     		str	r2, [r1]
+  32:Core/Source/main.c **** 
+  33:Core/Source/main.c ****     FLASH->ACR |= FLASH_ACR_ICEN | FLASH_ACR_DCEN | FLASH_ACR_PRFTEN | FLASH_ACR_LATENCY_2WS;
+  61              		.loc 1 33 5 is_stmt 1 view .LVU12
+  62              		.loc 1 33 16 is_stmt 0 view .LVU13
+  63 0028 01F5E631 		add	r1, r1, #117760
+  64 002c 0A68     		ldr	r2, [r1]
+  65 002e 42F4E062 		orr	r2, r2, #1792
+  66 0032 42F00202 		orr	r2, r2, #2
+  67 0036 0A60     		str	r2, [r1]
+  34:Core/Source/main.c **** 
+  35:Core/Source/main.c ****     RCC->CFGR |= RCC_CFGR_HPRE_DIV1;
+  68              		.loc 1 35 5 is_stmt 1 view .LVU14
+  69              		.loc 1 35 15 is_stmt 0 view .LVU15
+  70 0038 9A68     		ldr	r2, [r3, #8]
+  71 003a 9A60     		str	r2, [r3, #8]
+  36:Core/Source/main.c ****     RCC->CFGR |= RCC_CFGR_PPRE1_DIV2;
+  72              		.loc 1 36 5 is_stmt 1 view .LVU16
+  73              		.loc 1 36 15 is_stmt 0 view .LVU17
+  74 003c 9A68     		ldr	r2, [r3, #8]
+  75 003e 42F48052 		orr	r2, r2, #4096
+  76 0042 9A60     		str	r2, [r3, #8]
+  37:Core/Source/main.c ****     RCC->CFGR |= RCC_CFGR_PPRE2_DIV1;
+  77              		.loc 1 37 5 is_stmt 1 view .LVU18
+  78              		.loc 1 37 15 is_stmt 0 view .LVU19
+ARM GAS  /tmp/cctO5sfu.s 			page 3
+
+
+  79 0044 9A68     		ldr	r2, [r3, #8]
+  80 0046 9A60     		str	r2, [r3, #8]
+  38:Core/Source/main.c **** 
+  39:Core/Source/main.c ****     RCC->PLLCFGR = (PLL_M << RCC_PLLCFGR_PLLM_Pos) | (PLL_N << RCC_PLLCFGR_PLLN_Pos) | (PLL_P << RC
+  81              		.loc 1 39 5 is_stmt 1 view .LVU20
+  82              		.loc 1 39 18 is_stmt 0 view .LVU21
+  83 0048 0D4A     		ldr	r2, .L5+8
+  84 004a 5A60     		str	r2, [r3, #4]
+  40:Core/Source/main.c **** 
+  41:Core/Source/main.c ****     RCC->CR |= RCC_CR_PLLON;
+  85              		.loc 1 41 5 is_stmt 1 view .LVU22
+  86              		.loc 1 41 13 is_stmt 0 view .LVU23
+  87 004c 1A68     		ldr	r2, [r3]
+  88 004e 42F08072 		orr	r2, r2, #16777216
+  89 0052 1A60     		str	r2, [r3]
+  42:Core/Source/main.c **** 	while (!(RCC->CR & RCC_CR_PLLRDY));
+  90              		.loc 1 42 2 is_stmt 1 view .LVU24
+  91              	.L3:
+  92              		.loc 1 42 36 discriminator 1 view .LVU25
+  93              		.loc 1 42 8 discriminator 1 view .LVU26
+  94              		.loc 1 42 14 is_stmt 0 discriminator 1 view .LVU27
+  95 0054 084B     		ldr	r3, .L5
+  96 0056 1B68     		ldr	r3, [r3]
+  97              		.loc 1 42 8 discriminator 1 view .LVU28
+  98 0058 13F0007F 		tst	r3, #33554432
+  99 005c FAD0     		beq	.L3
+  43:Core/Source/main.c **** 
+  44:Core/Source/main.c ****     RCC->CFGR |= RCC_CFGR_SW_PLL;
+ 100              		.loc 1 44 5 is_stmt 1 view .LVU29
+ 101              		.loc 1 44 15 is_stmt 0 view .LVU30
+ 102 005e 064A     		ldr	r2, .L5
+ 103 0060 9368     		ldr	r3, [r2, #8]
+ 104 0062 43F00203 		orr	r3, r3, #2
+ 105 0066 9360     		str	r3, [r2, #8]
+  45:Core/Source/main.c **** 	while ((RCC->CFGR & RCC_CFGR_SWS) != RCC_CFGR_SWS_PLL);
+ 106              		.loc 1 45 2 is_stmt 1 view .LVU31
+ 107              	.L4:
+ 108              		.loc 1 45 56 discriminator 1 view .LVU32
+ 109              		.loc 1 45 8 discriminator 1 view .LVU33
+ 110              		.loc 1 45 13 is_stmt 0 discriminator 1 view .LVU34
+ 111 0068 034B     		ldr	r3, .L5
+ 112 006a 9B68     		ldr	r3, [r3, #8]
+ 113              		.loc 1 45 20 discriminator 1 view .LVU35
+ 114 006c 03F00C03 		and	r3, r3, #12
+ 115              		.loc 1 45 8 discriminator 1 view .LVU36
+ 116 0070 082B     		cmp	r3, #8
+ 117 0072 F9D1     		bne	.L4
+  46:Core/Source/main.c **** }
+ 118              		.loc 1 46 1 view .LVU37
+ 119 0074 7047     		bx	lr
+ 120              	.L6:
+ 121 0076 00BF     		.align	2
+ 122              	.L5:
+ 123 0078 00380240 		.word	1073887232
+ 124 007c 00700040 		.word	1073770496
+ 125 0080 04154200 		.word	4330756
+ 126              		.cfi_endproc
+ARM GAS  /tmp/cctO5sfu.s 			page 4
+
+
+ 127              	.LFE135:
+ 129              		.section	.text.GPIO_Config,"ax",%progbits
+ 130              		.align	1
+ 131              		.syntax unified
+ 132              		.thumb
+ 133              		.thumb_func
+ 135              	GPIO_Config:
+ 136              	.LFB136:
+  47:Core/Source/main.c **** 
+  48:Core/Source/main.c **** static void GPIO_Config (void)
+  49:Core/Source/main.c **** {
+ 137              		.loc 1 49 1 is_stmt 1 view -0
+ 138              		.cfi_startproc
+ 139              		@ args = 0, pretend = 0, frame = 0
+ 140              		@ frame_needed = 0, uses_anonymous_args = 0
+ 141              		@ link register save eliminated.
+  50:Core/Source/main.c **** 	RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN | RCC_AHB1ENR_GPIOCEN;
+ 142              		.loc 1 50 2 view .LVU39
+ 143              		.loc 1 50 15 is_stmt 0 view .LVU40
+ 144 0000 084A     		ldr	r2, .L8
+ 145 0002 136B     		ldr	r3, [r2, #48]
+ 146 0004 43F00503 		orr	r3, r3, #5
+ 147 0008 1363     		str	r3, [r2, #48]
+  51:Core/Source/main.c **** 	GPIOA->MODER |= GPIO_MODER_MODER5_0;
+ 148              		.loc 1 51 2 is_stmt 1 view .LVU41
+ 149              		.loc 1 51 15 is_stmt 0 view .LVU42
+ 150 000a A2F56052 		sub	r2, r2, #14336
+ 151 000e 1368     		ldr	r3, [r2]
+ 152 0010 43F48063 		orr	r3, r3, #1024
+ 153 0014 1360     		str	r3, [r2]
+  52:Core/Source/main.c ****     GPIOC->PUPDR |= GPIO_PUPDR_PUPD5_0;
+ 154              		.loc 1 52 5 is_stmt 1 view .LVU43
+ 155              		.loc 1 52 18 is_stmt 0 view .LVU44
+ 156 0016 02F50062 		add	r2, r2, #2048
+ 157 001a D368     		ldr	r3, [r2, #12]
+ 158 001c 43F48063 		orr	r3, r3, #1024
+ 159 0020 D360     		str	r3, [r2, #12]
+  53:Core/Source/main.c **** }
+ 160              		.loc 1 53 1 view .LVU45
+ 161 0022 7047     		bx	lr
+ 162              	.L9:
+ 163              		.align	2
+ 164              	.L8:
+ 165 0024 00380240 		.word	1073887232
+ 166              		.cfi_endproc
+ 167              	.LFE136:
+ 169              		.section	.text.main,"ax",%progbits
+ 170              		.align	1
+ 171              		.global	main
+ 172              		.syntax unified
+ 173              		.thumb
+ 174              		.thumb_func
+ 176              	main:
+ 177              	.LFB134:
+  11:Core/Source/main.c ****     RCC_Config();
+ 178              		.loc 1 11 1 is_stmt 1 view -0
+ 179              		.cfi_startproc
+ARM GAS  /tmp/cctO5sfu.s 			page 5
+
+
+ 180              		@ Volatile: function does not return.
+ 181              		@ args = 0, pretend = 0, frame = 0
+ 182              		@ frame_needed = 0, uses_anonymous_args = 0
+ 183 0000 08B5     		push	{r3, lr}
+ 184              	.LCFI0:
+ 185              		.cfi_def_cfa_offset 8
+ 186              		.cfi_offset 3, -8
+ 187              		.cfi_offset 14, -4
+  12:Core/Source/main.c ****     GPIO_Config();
+ 188              		.loc 1 12 5 view .LVU47
+ 189 0002 FFF7FEFF 		bl	RCC_Config
+ 190              	.LVL0:
+  13:Core/Source/main.c ****     while(1)
+ 191              		.loc 1 13 5 view .LVU48
+ 192 0006 FFF7FEFF 		bl	GPIO_Config
+ 193              	.LVL1:
+ 194 000a 04E0     		b	.L11
+ 195              	.L15:
+  17:Core/Source/main.c ****         } else {
+ 196              		.loc 1 17 13 view .LVU49
+  17:Core/Source/main.c ****         } else {
+ 197              		.loc 1 17 25 is_stmt 0 view .LVU50
+ 198 000c 074A     		ldr	r2, .L16
+ 199 000e 9369     		ldr	r3, [r2, #24]
+ 200 0010 43F02003 		orr	r3, r3, #32
+ 201 0014 9361     		str	r3, [r2, #24]
+ 202              	.L11:
+  14:Core/Source/main.c ****     {
+ 203              		.loc 1 14 5 is_stmt 1 view .LVU51
+  16:Core/Source/main.c ****             GPIOA->BSRR |= GPIO_BSRR_BS5;
+ 204              		.loc 1 16 9 view .LVU52
+  16:Core/Source/main.c ****             GPIOA->BSRR |= GPIO_BSRR_BS5;
+ 205              		.loc 1 16 19 is_stmt 0 view .LVU53
+ 206 0016 064B     		ldr	r3, .L16+4
+ 207 0018 1B69     		ldr	r3, [r3, #16]
+  16:Core/Source/main.c ****             GPIOA->BSRR |= GPIO_BSRR_BS5;
+ 208              		.loc 1 16 12 view .LVU54
+ 209 001a 13F4005F 		tst	r3, #8192
+ 210 001e F5D1     		bne	.L15
+  19:Core/Source/main.c ****         }
+ 211              		.loc 1 19 12 is_stmt 1 view .LVU55
+  19:Core/Source/main.c ****         }
+ 212              		.loc 1 19 24 is_stmt 0 view .LVU56
+ 213 0020 024A     		ldr	r2, .L16
+ 214 0022 9369     		ldr	r3, [r2, #24]
+ 215 0024 43F40013 		orr	r3, r3, #2097152
+ 216 0028 9361     		str	r3, [r2, #24]
+ 217 002a F4E7     		b	.L11
+ 218              	.L17:
+ 219              		.align	2
+ 220              	.L16:
+ 221 002c 00000240 		.word	1073872896
+ 222 0030 00080240 		.word	1073874944
+ 223              		.cfi_endproc
+ 224              	.LFE134:
+ 226              		.text
+ 227              	.Letext0:
+ARM GAS  /tmp/cctO5sfu.s 			page 6
+
+
+ 228              		.file 2 "/home/blackally/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/machine/_default_typ
+ 229              		.file 3 "/home/blackally/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/_stdint.h"
+ 230              		.file 4 "Core/Include/stm32f411xe.h"
+ARM GAS  /tmp/cctO5sfu.s 			page 7
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 main.c
+     /tmp/cctO5sfu.s:20     .text.RCC_Config:0000000000000000 $t
+     /tmp/cctO5sfu.s:25     .text.RCC_Config:0000000000000000 RCC_Config
+     /tmp/cctO5sfu.s:123    .text.RCC_Config:0000000000000078 $d
+     /tmp/cctO5sfu.s:130    .text.GPIO_Config:0000000000000000 $t
+     /tmp/cctO5sfu.s:135    .text.GPIO_Config:0000000000000000 GPIO_Config
+     /tmp/cctO5sfu.s:165    .text.GPIO_Config:0000000000000024 $d
+     /tmp/cctO5sfu.s:170    .text.main:0000000000000000 $t
+     /tmp/cctO5sfu.s:176    .text.main:0000000000000000 main
+     /tmp/cctO5sfu.s:221    .text.main:000000000000002c $d
+
+NO UNDEFINED SYMBOLS
