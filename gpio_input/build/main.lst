@@ -1,0 +1,474 @@
+ARM GAS  /tmp/cchk13QZ.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 6
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"main.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.main,"ax",%progbits
+  20              		.align	1
+  21              		.global	main
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  26              	main:
+  27              	.LFB134:
+  28              		.file 1 "src/main.c"
+   1:src/main.c    **** #include "stm32f4xx.h"
+   2:src/main.c    **** #include <stdbool.h>
+   3:src/main.c    **** 
+   4:src/main.c    **** #define PLL_P	2
+   5:src/main.c    **** #define PLL_M	4
+   6:src/main.c    **** #define PLL_N	100
+   7:src/main.c    **** 
+   8:src/main.c    **** static void SystemClock_Config(void);
+   9:src/main.c    **** static void GPIO_Config(void);
+  10:src/main.c    **** static bool Button_Pressed(void);
+  11:src/main.c    **** static void Toggle_Led(void);
+  12:src/main.c    **** int main(void)
+  13:src/main.c    **** {
+  29              		.loc 1 13 1
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 1, uses_anonymous_args = 0
+  33 0000 80B5     		push	{r7, lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 8
+  36              		.cfi_offset 7, -8
+  37              		.cfi_offset 14, -4
+  38 0002 00AF     		add	r7, sp, #0
+  39              	.LCFI1:
+  40              		.cfi_def_cfa_register 7
+  14:src/main.c    **** 	SystemClock_Config();
+  41              		.loc 1 14 2
+  42 0004 FFF7FEFF 		bl	SystemClock_Config
+  15:src/main.c    **** 	GPIO_Config();
+  43              		.loc 1 15 2
+ARM GAS  /tmp/cchk13QZ.s 			page 2
+
+
+  44 0008 FFF7FEFF 		bl	GPIO_Config
+  45              	.L3:
+  16:src/main.c    **** 	while (1) {
+  17:src/main.c    ****     		if(Button_Pressed()) {
+  46              		.loc 1 17 10
+  47 000c FFF7FEFF 		bl	Button_Pressed
+  48 0010 0346     		mov	r3, r0
+  49              		.loc 1 17 9
+  50 0012 002B     		cmp	r3, #0
+  51 0014 FAD0     		beq	.L3
+  18:src/main.c    **** 			Toggle_Led();
+  52              		.loc 1 18 4
+  53 0016 FFF7FEFF 		bl	Toggle_Led
+  17:src/main.c    **** 			Toggle_Led();
+  54              		.loc 1 17 9
+  55 001a F7E7     		b	.L3
+  56              		.cfi_endproc
+  57              	.LFE134:
+  59              		.section	.text.SystemClock_Config,"ax",%progbits
+  60              		.align	1
+  61              		.syntax unified
+  62              		.thumb
+  63              		.thumb_func
+  65              	SystemClock_Config:
+  66              	.LFB135:
+  19:src/main.c    **** 		}
+  20:src/main.c    **** 	}
+  21:src/main.c    ****    	return 0;
+  22:src/main.c    **** }
+  23:src/main.c    **** 
+  24:src/main.c    **** static void SystemClock_Config(void)
+  25:src/main.c    **** {
+  67              		.loc 1 25 1
+  68              		.cfi_startproc
+  69              		@ args = 0, pretend = 0, frame = 0
+  70              		@ frame_needed = 1, uses_anonymous_args = 0
+  71              		@ link register save eliminated.
+  72 0000 80B4     		push	{r7}
+  73              	.LCFI2:
+  74              		.cfi_def_cfa_offset 4
+  75              		.cfi_offset 7, -4
+  76 0002 00AF     		add	r7, sp, #0
+  77              	.LCFI3:
+  78              		.cfi_def_cfa_register 7
+  26:src/main.c    **** 	/* Turn on Clock Source */
+  27:src/main.c    **** 	RCC->CR |= RCC_CR_HSEON;
+  79              		.loc 1 27 10
+  80 0004 2A4B     		ldr	r3, .L8
+  81 0006 1B68     		ldr	r3, [r3]
+  82 0008 294A     		ldr	r2, .L8
+  83 000a 43F48033 		orr	r3, r3, #65536
+  84 000e 1360     		str	r3, [r2]
+  28:src/main.c    **** 	while (!(RCC->CR & RCC_CR_HSERDY));
+  85              		.loc 1 28 8
+  86 0010 00BF     		nop
+  87              	.L5:
+  88              		.loc 1 28 14 discriminator 1
+ARM GAS  /tmp/cchk13QZ.s 			page 3
+
+
+  89 0012 274B     		ldr	r3, .L8
+  90 0014 1B68     		ldr	r3, [r3]
+  91              		.loc 1 28 19 discriminator 1
+  92 0016 03F40033 		and	r3, r3, #131072
+  93              		.loc 1 28 8 discriminator 1
+  94 001a 002B     		cmp	r3, #0
+  95 001c F9D0     		beq	.L5
+  29:src/main.c    **** 
+  30:src/main.c    **** 	/* Setting Power and Flash */
+  31:src/main.c    **** 	RCC->APB1ENR |= RCC_APB1ENR_PWREN;
+  96              		.loc 1 31 15
+  97 001e 244B     		ldr	r3, .L8
+  98 0020 1B6C     		ldr	r3, [r3, #64]
+  99 0022 234A     		ldr	r2, .L8
+ 100 0024 43F08053 		orr	r3, r3, #268435456
+ 101 0028 1364     		str	r3, [r2, #64]
+  32:src/main.c    **** 	PWR->CR |= PWR_CR_VOS_0 | PWR_CR_VOS_1;
+ 102              		.loc 1 32 10
+ 103 002a 224B     		ldr	r3, .L8+4
+ 104 002c 1B68     		ldr	r3, [r3]
+ 105 002e 214A     		ldr	r2, .L8+4
+ 106 0030 43F44043 		orr	r3, r3, #49152
+ 107 0034 1360     		str	r3, [r2]
+  33:src/main.c    **** 
+  34:src/main.c    **** 	FLASH->ACR |= FLASH_ACR_DCEN | FLASH_ACR_ICEN | FLASH_ACR_PRFTEN | FLASH_ACR_LATENCY_3WS;
+ 108              		.loc 1 34 13
+ 109 0036 204B     		ldr	r3, .L8+8
+ 110 0038 1B68     		ldr	r3, [r3]
+ 111 003a 1F4A     		ldr	r2, .L8+8
+ 112 003c 43F4E063 		orr	r3, r3, #1792
+ 113 0040 43F00303 		orr	r3, r3, #3
+ 114 0044 1360     		str	r3, [r2]
+  35:src/main.c    **** 	
+  36:src/main.c    **** 	/* PLL Config and setting source clock for PLL */
+  37:src/main.c    **** 	RCC->PLLCFGR |= (PLL_N << RCC_PLLCFGR_PLLN_Pos) | (PLL_M << RCC_PLLCFGR_PLLM_Pos) | (PLL_P << RCC_
+ 115              		.loc 1 37 15
+ 116 0046 1A4B     		ldr	r3, .L8
+ 117 0048 5B68     		ldr	r3, [r3, #4]
+ 118 004a 194A     		ldr	r2, .L8
+ 119 004c 43F40633 		orr	r3, r3, #137216
+ 120 0050 43F48273 		orr	r3, r3, #260
+ 121 0054 5360     		str	r3, [r2, #4]
+  38:src/main.c    **** 	RCC->PLLCFGR |= RCC_PLLCFGR_PLLSRC_HSE;
+ 122              		.loc 1 38 15
+ 123 0056 164B     		ldr	r3, .L8
+ 124 0058 5B68     		ldr	r3, [r3, #4]
+ 125 005a 154A     		ldr	r2, .L8
+ 126 005c 43F48003 		orr	r3, r3, #4194304
+ 127 0060 5360     		str	r3, [r2, #4]
+  39:src/main.c    **** 
+  40:src/main.c    **** 	/* Config AHB, APB1 and APB2 */
+  41:src/main.c    **** 	RCC->CFGR |= RCC_CFGR_HPRE_DIV1 | RCC_CFGR_PPRE1_DIV2 | RCC_CFGR_PPRE2_DIV1;
+ 128              		.loc 1 41 12
+ 129 0062 134B     		ldr	r3, .L8
+ 130 0064 9B68     		ldr	r3, [r3, #8]
+ 131 0066 124A     		ldr	r2, .L8
+ 132 0068 43F48053 		orr	r3, r3, #4096
+ARM GAS  /tmp/cchk13QZ.s 			page 4
+
+
+ 133 006c 9360     		str	r3, [r2, #8]
+  42:src/main.c    **** 
+  43:src/main.c    **** 	/* Turn on PLL */
+  44:src/main.c    **** 	RCC->CR |= RCC_CR_PLLON;
+ 134              		.loc 1 44 10
+ 135 006e 104B     		ldr	r3, .L8
+ 136 0070 1B68     		ldr	r3, [r3]
+ 137 0072 0F4A     		ldr	r2, .L8
+ 138 0074 43F08073 		orr	r3, r3, #16777216
+ 139 0078 1360     		str	r3, [r2]
+  45:src/main.c    **** 	while (!(RCC->CR & RCC_CR_PLLRDY));
+ 140              		.loc 1 45 8
+ 141 007a 00BF     		nop
+ 142              	.L6:
+ 143              		.loc 1 45 14 discriminator 1
+ 144 007c 0C4B     		ldr	r3, .L8
+ 145 007e 1B68     		ldr	r3, [r3]
+ 146              		.loc 1 45 19 discriminator 1
+ 147 0080 03F00073 		and	r3, r3, #33554432
+ 148              		.loc 1 45 8 discriminator 1
+ 149 0084 002B     		cmp	r3, #0
+ 150 0086 F9D0     		beq	.L6
+  46:src/main.c    **** 
+  47:src/main.c    **** 	/* Config System Clock  */
+  48:src/main.c    **** 	RCC->CFGR |= RCC_CFGR_SW_PLL;
+ 151              		.loc 1 48 12
+ 152 0088 094B     		ldr	r3, .L8
+ 153 008a 9B68     		ldr	r3, [r3, #8]
+ 154 008c 084A     		ldr	r2, .L8
+ 155 008e 43F00203 		orr	r3, r3, #2
+ 156 0092 9360     		str	r3, [r2, #8]
+  49:src/main.c    **** 	while ((RCC->CFGR & RCC_CFGR_SWS_PLL) != RCC_CFGR_SWS_PLL);
+ 157              		.loc 1 49 8
+ 158 0094 00BF     		nop
+ 159              	.L7:
+ 160              		.loc 1 49 13 discriminator 1
+ 161 0096 064B     		ldr	r3, .L8
+ 162 0098 9B68     		ldr	r3, [r3, #8]
+ 163              		.loc 1 49 20 discriminator 1
+ 164 009a 03F00803 		and	r3, r3, #8
+ 165              		.loc 1 49 8 discriminator 1
+ 166 009e 082B     		cmp	r3, #8
+ 167 00a0 F9D1     		bne	.L7
+  50:src/main.c    **** }
+ 168              		.loc 1 50 1
+ 169 00a2 00BF     		nop
+ 170 00a4 00BF     		nop
+ 171 00a6 BD46     		mov	sp, r7
+ 172              	.LCFI4:
+ 173              		.cfi_def_cfa_register 13
+ 174              		@ sp needed
+ 175 00a8 5DF8047B 		ldr	r7, [sp], #4
+ 176              	.LCFI5:
+ 177              		.cfi_restore 7
+ 178              		.cfi_def_cfa_offset 0
+ 179 00ac 7047     		bx	lr
+ 180              	.L9:
+ARM GAS  /tmp/cchk13QZ.s 			page 5
+
+
+ 181 00ae 00BF     		.align	2
+ 182              	.L8:
+ 183 00b0 00380240 		.word	1073887232
+ 184 00b4 00700040 		.word	1073770496
+ 185 00b8 003C0240 		.word	1073888256
+ 186              		.cfi_endproc
+ 187              	.LFE135:
+ 189              		.section	.text.GPIO_Config,"ax",%progbits
+ 190              		.align	1
+ 191              		.syntax unified
+ 192              		.thumb
+ 193              		.thumb_func
+ 195              	GPIO_Config:
+ 196              	.LFB136:
+  51:src/main.c    **** 
+  52:src/main.c    **** static void GPIO_Config(void)
+  53:src/main.c    **** {
+ 197              		.loc 1 53 1
+ 198              		.cfi_startproc
+ 199              		@ args = 0, pretend = 0, frame = 0
+ 200              		@ frame_needed = 1, uses_anonymous_args = 0
+ 201              		@ link register save eliminated.
+ 202 0000 80B4     		push	{r7}
+ 203              	.LCFI6:
+ 204              		.cfi_def_cfa_offset 4
+ 205              		.cfi_offset 7, -4
+ 206 0002 00AF     		add	r7, sp, #0
+ 207              	.LCFI7:
+ 208              		.cfi_def_cfa_register 7
+  54:src/main.c    **** 	/* GPIOA Clock Enable */
+  55:src/main.c    **** 	RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN | RCC_AHB1ENR_GPIOCEN; 
+ 209              		.loc 1 55 15
+ 210 0004 0B4B     		ldr	r3, .L11
+ 211 0006 1B6B     		ldr	r3, [r3, #48]
+ 212 0008 0A4A     		ldr	r2, .L11
+ 213 000a 43F00503 		orr	r3, r3, #5
+ 214 000e 1363     		str	r3, [r2, #48]
+  56:src/main.c    **** 	/* Config GPIOA Pin 5 as ouput */
+  57:src/main.c    **** 	GPIOA->MODER |= GPIO_MODER_MODER5_0;
+ 215              		.loc 1 57 15
+ 216 0010 094B     		ldr	r3, .L11+4
+ 217 0012 1B68     		ldr	r3, [r3]
+ 218 0014 084A     		ldr	r2, .L11+4
+ 219 0016 43F48063 		orr	r3, r3, #1024
+ 220 001a 1360     		str	r3, [r2]
+  58:src/main.c    ****     /* Config GPIO C Pin 13 as input */
+  59:src/main.c    ****     GPIOC->PUPDR |= GPIO_PUPDR_PUPD13_0; /* Pull up */
+ 221              		.loc 1 59 18
+ 222 001c 074B     		ldr	r3, .L11+8
+ 223 001e DB68     		ldr	r3, [r3, #12]
+ 224 0020 064A     		ldr	r2, .L11+8
+ 225 0022 43F08063 		orr	r3, r3, #67108864
+ 226 0026 D360     		str	r3, [r2, #12]
+  60:src/main.c    **** }
+ 227              		.loc 1 60 1
+ 228 0028 00BF     		nop
+ 229 002a BD46     		mov	sp, r7
+ARM GAS  /tmp/cchk13QZ.s 			page 6
+
+
+ 230              	.LCFI8:
+ 231              		.cfi_def_cfa_register 13
+ 232              		@ sp needed
+ 233 002c 5DF8047B 		ldr	r7, [sp], #4
+ 234              	.LCFI9:
+ 235              		.cfi_restore 7
+ 236              		.cfi_def_cfa_offset 0
+ 237 0030 7047     		bx	lr
+ 238              	.L12:
+ 239 0032 00BF     		.align	2
+ 240              	.L11:
+ 241 0034 00380240 		.word	1073887232
+ 242 0038 00000240 		.word	1073872896
+ 243 003c 00080240 		.word	1073874944
+ 244              		.cfi_endproc
+ 245              	.LFE136:
+ 247              		.section	.text.Button_Pressed,"ax",%progbits
+ 248              		.align	1
+ 249              		.syntax unified
+ 250              		.thumb
+ 251              		.thumb_func
+ 253              	Button_Pressed:
+ 254              	.LFB137:
+  61:src/main.c    **** 
+  62:src/main.c    **** static bool Button_Pressed(void)
+  63:src/main.c    **** {
+ 255              		.loc 1 63 1
+ 256              		.cfi_startproc
+ 257              		@ args = 0, pretend = 0, frame = 0
+ 258              		@ frame_needed = 1, uses_anonymous_args = 0
+ 259              		@ link register save eliminated.
+ 260 0000 80B4     		push	{r7}
+ 261              	.LCFI10:
+ 262              		.cfi_def_cfa_offset 4
+ 263              		.cfi_offset 7, -4
+ 264 0002 00AF     		add	r7, sp, #0
+ 265              	.LCFI11:
+ 266              		.cfi_def_cfa_register 7
+  64:src/main.c    **** 	return !((GPIOC->IDR & GPIO_IDR_ID13) == GPIO_IDR_ID13);
+ 267              		.loc 1 64 17
+ 268 0004 074B     		ldr	r3, .L15
+ 269 0006 1B69     		ldr	r3, [r3, #16]
+ 270              		.loc 1 64 23
+ 271 0008 03F40053 		and	r3, r3, #8192
+ 272              		.loc 1 64 9
+ 273 000c B3F5005F 		cmp	r3, #8192
+ 274 0010 14BF     		ite	ne
+ 275 0012 0123     		movne	r3, #1
+ 276 0014 0023     		moveq	r3, #0
+ 277 0016 DBB2     		uxtb	r3, r3
+  65:src/main.c    **** }
+ 278              		.loc 1 65 1
+ 279 0018 1846     		mov	r0, r3
+ 280 001a BD46     		mov	sp, r7
+ 281              	.LCFI12:
+ 282              		.cfi_def_cfa_register 13
+ 283              		@ sp needed
+ARM GAS  /tmp/cchk13QZ.s 			page 7
+
+
+ 284 001c 5DF8047B 		ldr	r7, [sp], #4
+ 285              	.LCFI13:
+ 286              		.cfi_restore 7
+ 287              		.cfi_def_cfa_offset 0
+ 288 0020 7047     		bx	lr
+ 289              	.L16:
+ 290 0022 00BF     		.align	2
+ 291              	.L15:
+ 292 0024 00080240 		.word	1073874944
+ 293              		.cfi_endproc
+ 294              	.LFE137:
+ 296              		.section	.text.Toggle_Led,"ax",%progbits
+ 297              		.align	1
+ 298              		.syntax unified
+ 299              		.thumb
+ 300              		.thumb_func
+ 302              	Toggle_Led:
+ 303              	.LFB138:
+  66:src/main.c    **** 
+  67:src/main.c    **** static void Toggle_Led(void)
+  68:src/main.c    **** {
+ 304              		.loc 1 68 1
+ 305              		.cfi_startproc
+ 306              		@ args = 0, pretend = 0, frame = 8
+ 307              		@ frame_needed = 1, uses_anonymous_args = 0
+ 308              		@ link register save eliminated.
+ 309 0000 80B4     		push	{r7}
+ 310              	.LCFI14:
+ 311              		.cfi_def_cfa_offset 4
+ 312              		.cfi_offset 7, -4
+ 313 0002 83B0     		sub	sp, sp, #12
+ 314              	.LCFI15:
+ 315              		.cfi_def_cfa_offset 16
+ 316 0004 00AF     		add	r7, sp, #0
+ 317              	.LCFI16:
+ 318              		.cfi_def_cfa_register 7
+  69:src/main.c    **** 	uint32_t odr = GPIOA->ODR;
+ 319              		.loc 1 69 22
+ 320 0006 0B4B     		ldr	r3, .L18
+ 321              		.loc 1 69 11
+ 322 0008 5B69     		ldr	r3, [r3, #20]
+ 323 000a 7B60     		str	r3, [r7, #4]
+  70:src/main.c    **** 	GPIOA->BSRR |= ((odr & (1 << 5)) << 16u) | (~odr & (1 << 5));
+ 324              		.loc 1 70 14
+ 325 000c 094B     		ldr	r3, .L18
+ 326 000e 9A69     		ldr	r2, [r3, #24]
+ 327              		.loc 1 70 35
+ 328 0010 7B68     		ldr	r3, [r7, #4]
+ 329 0012 1B04     		lsls	r3, r3, #16
+ 330 0014 03F40011 		and	r1, r3, #2097152
+ 331              		.loc 1 70 46
+ 332 0018 7B68     		ldr	r3, [r7, #4]
+ 333 001a DB43     		mvns	r3, r3
+ 334              		.loc 1 70 51
+ 335 001c 03F02003 		and	r3, r3, #32
+ 336              		.loc 1 70 43
+ 337 0020 0B43     		orrs	r3, r3, r1
+ARM GAS  /tmp/cchk13QZ.s 			page 8
+
+
+ 338              		.loc 1 70 14
+ 339 0022 0449     		ldr	r1, .L18
+ 340 0024 1343     		orrs	r3, r3, r2
+ 341 0026 8B61     		str	r3, [r1, #24]
+  71:src/main.c    **** }
+ 342              		.loc 1 71 1
+ 343 0028 00BF     		nop
+ 344 002a 0C37     		adds	r7, r7, #12
+ 345              	.LCFI17:
+ 346              		.cfi_def_cfa_offset 4
+ 347 002c BD46     		mov	sp, r7
+ 348              	.LCFI18:
+ 349              		.cfi_def_cfa_register 13
+ 350              		@ sp needed
+ 351 002e 5DF8047B 		ldr	r7, [sp], #4
+ 352              	.LCFI19:
+ 353              		.cfi_restore 7
+ 354              		.cfi_def_cfa_offset 0
+ 355 0032 7047     		bx	lr
+ 356              	.L19:
+ 357              		.align	2
+ 358              	.L18:
+ 359 0034 00000240 		.word	1073872896
+ 360              		.cfi_endproc
+ 361              	.LFE138:
+ 363              		.text
+ 364              	.Letext0:
+ 365              		.file 2 "/home/blackally/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/machine/_default_typ
+ 366              		.file 3 "/home/blackally/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/_stdint.h"
+ 367              		.file 4 "inc/stm32f411xe.h"
+ARM GAS  /tmp/cchk13QZ.s 			page 9
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 main.c
+     /tmp/cchk13QZ.s:20     .text.main:0000000000000000 $t
+     /tmp/cchk13QZ.s:26     .text.main:0000000000000000 main
+     /tmp/cchk13QZ.s:65     .text.SystemClock_Config:0000000000000000 SystemClock_Config
+     /tmp/cchk13QZ.s:195    .text.GPIO_Config:0000000000000000 GPIO_Config
+     /tmp/cchk13QZ.s:253    .text.Button_Pressed:0000000000000000 Button_Pressed
+     /tmp/cchk13QZ.s:302    .text.Toggle_Led:0000000000000000 Toggle_Led
+     /tmp/cchk13QZ.s:60     .text.SystemClock_Config:0000000000000000 $t
+     /tmp/cchk13QZ.s:183    .text.SystemClock_Config:00000000000000b0 $d
+     /tmp/cchk13QZ.s:190    .text.GPIO_Config:0000000000000000 $t
+     /tmp/cchk13QZ.s:241    .text.GPIO_Config:0000000000000034 $d
+     /tmp/cchk13QZ.s:248    .text.Button_Pressed:0000000000000000 $t
+     /tmp/cchk13QZ.s:292    .text.Button_Pressed:0000000000000024 $d
+     /tmp/cchk13QZ.s:297    .text.Toggle_Led:0000000000000000 $t
+     /tmp/cchk13QZ.s:359    .text.Toggle_Led:0000000000000034 $d
+
+NO UNDEFINED SYMBOLS
