@@ -1,0 +1,470 @@
+ARM GAS  /tmp/ccx3VPer.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 6
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"main.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.main,"ax",%progbits
+  20              		.align	1
+  21              		.global	main
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  26              	main:
+  27              	.LFB134:
+  28              		.file 1 "Core/Source/main.c"
+   1:Core/Source/main.c **** #include "stm32f4xx.h"
+   2:Core/Source/main.c **** 
+   3:Core/Source/main.c **** #define PLL_P	2
+   4:Core/Source/main.c **** #define PLL_M	4
+   5:Core/Source/main.c **** #define PLL_N	100
+   6:Core/Source/main.c **** 
+   7:Core/Source/main.c **** static void SystemClock_Config(void);
+   8:Core/Source/main.c **** static void GPIO_Config(void);
+   9:Core/Source/main.c **** static void Toggle_Led(void);
+  10:Core/Source/main.c **** static void DelayMS(uint32_t period);
+  11:Core/Source/main.c **** 
+  12:Core/Source/main.c **** int main(void)
+  13:Core/Source/main.c **** {
+  29              		.loc 1 13 1
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 1, uses_anonymous_args = 0
+  33 0000 80B5     		push	{r7, lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 8
+  36              		.cfi_offset 7, -8
+  37              		.cfi_offset 14, -4
+  38 0002 00AF     		add	r7, sp, #0
+  39              	.LCFI1:
+  40              		.cfi_def_cfa_register 7
+  14:Core/Source/main.c **** 	SystemClock_Config();
+  41              		.loc 1 14 2
+  42 0004 FFF7FEFF 		bl	SystemClock_Config
+  15:Core/Source/main.c **** 	GPIO_Config();
+  43              		.loc 1 15 2
+ARM GAS  /tmp/ccx3VPer.s 			page 2
+
+
+  44 0008 FFF7FEFF 		bl	GPIO_Config
+  45              	.L2:
+  16:Core/Source/main.c **** 	while (1) {
+  17:Core/Source/main.c ****  		Toggle_Led();	
+  46              		.loc 1 17 4 discriminator 1
+  47 000c FFF7FEFF 		bl	Toggle_Led
+  18:Core/Source/main.c **** 		DelayMS(2000);
+  48              		.loc 1 18 3 discriminator 1
+  49 0010 4FF4FA60 		mov	r0, #2000
+  50 0014 FFF7FEFF 		bl	DelayMS
+  17:Core/Source/main.c **** 		DelayMS(2000);
+  51              		.loc 1 17 4 discriminator 1
+  52 0018 F8E7     		b	.L2
+  53              		.cfi_endproc
+  54              	.LFE134:
+  56              		.section	.text.SystemClock_Config,"ax",%progbits
+  57              		.align	1
+  58              		.syntax unified
+  59              		.thumb
+  60              		.thumb_func
+  62              	SystemClock_Config:
+  63              	.LFB135:
+  19:Core/Source/main.c ****     	}
+  20:Core/Source/main.c ****    	return 0;
+  21:Core/Source/main.c **** }
+  22:Core/Source/main.c **** 
+  23:Core/Source/main.c **** static void SystemClock_Config(void)
+  24:Core/Source/main.c **** {
+  64              		.loc 1 24 1
+  65              		.cfi_startproc
+  66              		@ args = 0, pretend = 0, frame = 0
+  67              		@ frame_needed = 1, uses_anonymous_args = 0
+  68              		@ link register save eliminated.
+  69 0000 80B4     		push	{r7}
+  70              	.LCFI2:
+  71              		.cfi_def_cfa_offset 4
+  72              		.cfi_offset 7, -4
+  73 0002 00AF     		add	r7, sp, #0
+  74              	.LCFI3:
+  75              		.cfi_def_cfa_register 7
+  25:Core/Source/main.c **** 	/* Turn on Clock Source */
+  26:Core/Source/main.c **** 	RCC->CR |= RCC_CR_HSEON;
+  76              		.loc 1 26 10
+  77 0004 2A4B     		ldr	r3, .L7
+  78 0006 1B68     		ldr	r3, [r3]
+  79 0008 294A     		ldr	r2, .L7
+  80 000a 43F48033 		orr	r3, r3, #65536
+  81 000e 1360     		str	r3, [r2]
+  27:Core/Source/main.c **** 	while (!(RCC->CR & RCC_CR_HSERDY));
+  82              		.loc 1 27 8
+  83 0010 00BF     		nop
+  84              	.L4:
+  85              		.loc 1 27 14 discriminator 1
+  86 0012 274B     		ldr	r3, .L7
+  87 0014 1B68     		ldr	r3, [r3]
+  88              		.loc 1 27 19 discriminator 1
+  89 0016 03F40033 		and	r3, r3, #131072
+ARM GAS  /tmp/ccx3VPer.s 			page 3
+
+
+  90              		.loc 1 27 8 discriminator 1
+  91 001a 002B     		cmp	r3, #0
+  92 001c F9D0     		beq	.L4
+  28:Core/Source/main.c **** 
+  29:Core/Source/main.c **** 	/* Setting Power and Flash */
+  30:Core/Source/main.c **** 	RCC->APB1ENR |= RCC_APB1ENR_PWREN;
+  93              		.loc 1 30 15
+  94 001e 244B     		ldr	r3, .L7
+  95 0020 1B6C     		ldr	r3, [r3, #64]
+  96 0022 234A     		ldr	r2, .L7
+  97 0024 43F08053 		orr	r3, r3, #268435456
+  98 0028 1364     		str	r3, [r2, #64]
+  31:Core/Source/main.c **** 	PWR->CR |= PWR_CR_VOS_0 | PWR_CR_VOS_1;
+  99              		.loc 1 31 10
+ 100 002a 224B     		ldr	r3, .L7+4
+ 101 002c 1B68     		ldr	r3, [r3]
+ 102 002e 214A     		ldr	r2, .L7+4
+ 103 0030 43F44043 		orr	r3, r3, #49152
+ 104 0034 1360     		str	r3, [r2]
+  32:Core/Source/main.c **** 
+  33:Core/Source/main.c **** 	FLASH->ACR |= FLASH_ACR_DCEN | FLASH_ACR_ICEN | FLASH_ACR_PRFTEN | FLASH_ACR_LATENCY_3WS;
+ 105              		.loc 1 33 13
+ 106 0036 204B     		ldr	r3, .L7+8
+ 107 0038 1B68     		ldr	r3, [r3]
+ 108 003a 1F4A     		ldr	r2, .L7+8
+ 109 003c 43F4E063 		orr	r3, r3, #1792
+ 110 0040 43F00303 		orr	r3, r3, #3
+ 111 0044 1360     		str	r3, [r2]
+  34:Core/Source/main.c **** 	
+  35:Core/Source/main.c **** 	/* PLL Config and setting source clock for PLL */
+  36:Core/Source/main.c **** 	RCC->PLLCFGR |= (PLL_N << RCC_PLLCFGR_PLLN_Pos) | (PLL_M << RCC_PLLCFGR_PLLM_Pos) | (PLL_P << RCC_
+ 112              		.loc 1 36 15
+ 113 0046 1A4B     		ldr	r3, .L7
+ 114 0048 5B68     		ldr	r3, [r3, #4]
+ 115 004a 194A     		ldr	r2, .L7
+ 116 004c 43F40633 		orr	r3, r3, #137216
+ 117 0050 43F48273 		orr	r3, r3, #260
+ 118 0054 5360     		str	r3, [r2, #4]
+  37:Core/Source/main.c **** 	RCC->PLLCFGR |= RCC_PLLCFGR_PLLSRC_HSE;
+ 119              		.loc 1 37 15
+ 120 0056 164B     		ldr	r3, .L7
+ 121 0058 5B68     		ldr	r3, [r3, #4]
+ 122 005a 154A     		ldr	r2, .L7
+ 123 005c 43F48003 		orr	r3, r3, #4194304
+ 124 0060 5360     		str	r3, [r2, #4]
+  38:Core/Source/main.c **** 
+  39:Core/Source/main.c **** 	/* Config AHB, APB1 and APB2 */
+  40:Core/Source/main.c **** 	RCC->CFGR |= RCC_CFGR_HPRE_DIV1 | RCC_CFGR_PPRE1_DIV2 | RCC_CFGR_PPRE2_DIV1;
+ 125              		.loc 1 40 12
+ 126 0062 134B     		ldr	r3, .L7
+ 127 0064 9B68     		ldr	r3, [r3, #8]
+ 128 0066 124A     		ldr	r2, .L7
+ 129 0068 43F48053 		orr	r3, r3, #4096
+ 130 006c 9360     		str	r3, [r2, #8]
+  41:Core/Source/main.c **** 
+  42:Core/Source/main.c **** 	/* Turn on PLL */
+  43:Core/Source/main.c **** 	RCC->CR |= RCC_CR_PLLON;
+ARM GAS  /tmp/ccx3VPer.s 			page 4
+
+
+ 131              		.loc 1 43 10
+ 132 006e 104B     		ldr	r3, .L7
+ 133 0070 1B68     		ldr	r3, [r3]
+ 134 0072 0F4A     		ldr	r2, .L7
+ 135 0074 43F08073 		orr	r3, r3, #16777216
+ 136 0078 1360     		str	r3, [r2]
+  44:Core/Source/main.c **** 	while (!(RCC->CR & RCC_CR_PLLRDY));
+ 137              		.loc 1 44 8
+ 138 007a 00BF     		nop
+ 139              	.L5:
+ 140              		.loc 1 44 14 discriminator 1
+ 141 007c 0C4B     		ldr	r3, .L7
+ 142 007e 1B68     		ldr	r3, [r3]
+ 143              		.loc 1 44 19 discriminator 1
+ 144 0080 03F00073 		and	r3, r3, #33554432
+ 145              		.loc 1 44 8 discriminator 1
+ 146 0084 002B     		cmp	r3, #0
+ 147 0086 F9D0     		beq	.L5
+  45:Core/Source/main.c **** 
+  46:Core/Source/main.c **** 	/* Config System Clock  */
+  47:Core/Source/main.c **** 	RCC->CFGR |= RCC_CFGR_SW_PLL;
+ 148              		.loc 1 47 12
+ 149 0088 094B     		ldr	r3, .L7
+ 150 008a 9B68     		ldr	r3, [r3, #8]
+ 151 008c 084A     		ldr	r2, .L7
+ 152 008e 43F00203 		orr	r3, r3, #2
+ 153 0092 9360     		str	r3, [r2, #8]
+  48:Core/Source/main.c **** 	while ((RCC->CFGR & RCC_CFGR_SWS_PLL) != RCC_CFGR_SWS_PLL);
+ 154              		.loc 1 48 8
+ 155 0094 00BF     		nop
+ 156              	.L6:
+ 157              		.loc 1 48 13 discriminator 1
+ 158 0096 064B     		ldr	r3, .L7
+ 159 0098 9B68     		ldr	r3, [r3, #8]
+ 160              		.loc 1 48 20 discriminator 1
+ 161 009a 03F00803 		and	r3, r3, #8
+ 162              		.loc 1 48 8 discriminator 1
+ 163 009e 082B     		cmp	r3, #8
+ 164 00a0 F9D1     		bne	.L6
+  49:Core/Source/main.c **** }
+ 165              		.loc 1 49 1
+ 166 00a2 00BF     		nop
+ 167 00a4 00BF     		nop
+ 168 00a6 BD46     		mov	sp, r7
+ 169              	.LCFI4:
+ 170              		.cfi_def_cfa_register 13
+ 171              		@ sp needed
+ 172 00a8 5DF8047B 		ldr	r7, [sp], #4
+ 173              	.LCFI5:
+ 174              		.cfi_restore 7
+ 175              		.cfi_def_cfa_offset 0
+ 176 00ac 7047     		bx	lr
+ 177              	.L8:
+ 178 00ae 00BF     		.align	2
+ 179              	.L7:
+ 180 00b0 00380240 		.word	1073887232
+ 181 00b4 00700040 		.word	1073770496
+ARM GAS  /tmp/ccx3VPer.s 			page 5
+
+
+ 182 00b8 003C0240 		.word	1073888256
+ 183              		.cfi_endproc
+ 184              	.LFE135:
+ 186              		.section	.text.GPIO_Config,"ax",%progbits
+ 187              		.align	1
+ 188              		.syntax unified
+ 189              		.thumb
+ 190              		.thumb_func
+ 192              	GPIO_Config:
+ 193              	.LFB136:
+  50:Core/Source/main.c **** 
+  51:Core/Source/main.c **** static void GPIO_Config(void)
+  52:Core/Source/main.c **** {
+ 194              		.loc 1 52 1
+ 195              		.cfi_startproc
+ 196              		@ args = 0, pretend = 0, frame = 0
+ 197              		@ frame_needed = 1, uses_anonymous_args = 0
+ 198              		@ link register save eliminated.
+ 199 0000 80B4     		push	{r7}
+ 200              	.LCFI6:
+ 201              		.cfi_def_cfa_offset 4
+ 202              		.cfi_offset 7, -4
+ 203 0002 00AF     		add	r7, sp, #0
+ 204              	.LCFI7:
+ 205              		.cfi_def_cfa_register 7
+  53:Core/Source/main.c **** 	/* GPIOA Clock Enable */
+  54:Core/Source/main.c **** 	RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN;
+ 206              		.loc 1 54 15
+ 207 0004 084B     		ldr	r3, .L10
+ 208 0006 1B6B     		ldr	r3, [r3, #48]
+ 209 0008 074A     		ldr	r2, .L10
+ 210 000a 43F00103 		orr	r3, r3, #1
+ 211 000e 1363     		str	r3, [r2, #48]
+  55:Core/Source/main.c **** 	
+  56:Core/Source/main.c **** 	/* Config GPIOA Pin 5 as ouput */
+  57:Core/Source/main.c **** 	GPIOA->MODER |= GPIO_MODER_MODER5_0;
+ 212              		.loc 1 57 15
+ 213 0010 064B     		ldr	r3, .L10+4
+ 214 0012 1B68     		ldr	r3, [r3]
+ 215 0014 054A     		ldr	r2, .L10+4
+ 216 0016 43F48063 		orr	r3, r3, #1024
+ 217 001a 1360     		str	r3, [r2]
+  58:Core/Source/main.c **** }
+ 218              		.loc 1 58 1
+ 219 001c 00BF     		nop
+ 220 001e BD46     		mov	sp, r7
+ 221              	.LCFI8:
+ 222              		.cfi_def_cfa_register 13
+ 223              		@ sp needed
+ 224 0020 5DF8047B 		ldr	r7, [sp], #4
+ 225              	.LCFI9:
+ 226              		.cfi_restore 7
+ 227              		.cfi_def_cfa_offset 0
+ 228 0024 7047     		bx	lr
+ 229              	.L11:
+ 230 0026 00BF     		.align	2
+ 231              	.L10:
+ARM GAS  /tmp/ccx3VPer.s 			page 6
+
+
+ 232 0028 00380240 		.word	1073887232
+ 233 002c 00000240 		.word	1073872896
+ 234              		.cfi_endproc
+ 235              	.LFE136:
+ 237              		.section	.text.Toggle_Led,"ax",%progbits
+ 238              		.align	1
+ 239              		.syntax unified
+ 240              		.thumb
+ 241              		.thumb_func
+ 243              	Toggle_Led:
+ 244              	.LFB137:
+  59:Core/Source/main.c **** 
+  60:Core/Source/main.c **** static void Toggle_Led(void)
+  61:Core/Source/main.c **** {
+ 245              		.loc 1 61 1
+ 246              		.cfi_startproc
+ 247              		@ args = 0, pretend = 0, frame = 8
+ 248              		@ frame_needed = 1, uses_anonymous_args = 0
+ 249              		@ link register save eliminated.
+ 250 0000 80B4     		push	{r7}
+ 251              	.LCFI10:
+ 252              		.cfi_def_cfa_offset 4
+ 253              		.cfi_offset 7, -4
+ 254 0002 83B0     		sub	sp, sp, #12
+ 255              	.LCFI11:
+ 256              		.cfi_def_cfa_offset 16
+ 257 0004 00AF     		add	r7, sp, #0
+ 258              	.LCFI12:
+ 259              		.cfi_def_cfa_register 7
+  62:Core/Source/main.c **** 	uint32_t odr = GPIOA->ODR;
+ 260              		.loc 1 62 22
+ 261 0006 0B4B     		ldr	r3, .L13
+ 262              		.loc 1 62 11
+ 263 0008 5B69     		ldr	r3, [r3, #20]
+ 264 000a 7B60     		str	r3, [r7, #4]
+  63:Core/Source/main.c **** 	GPIOA->BSRR |= ((odr & (1 << 5)) << 16u) | (~odr & (1 << 5));
+ 265              		.loc 1 63 14
+ 266 000c 094B     		ldr	r3, .L13
+ 267 000e 9A69     		ldr	r2, [r3, #24]
+ 268              		.loc 1 63 35
+ 269 0010 7B68     		ldr	r3, [r7, #4]
+ 270 0012 1B04     		lsls	r3, r3, #16
+ 271 0014 03F40011 		and	r1, r3, #2097152
+ 272              		.loc 1 63 46
+ 273 0018 7B68     		ldr	r3, [r7, #4]
+ 274 001a DB43     		mvns	r3, r3
+ 275              		.loc 1 63 51
+ 276 001c 03F02003 		and	r3, r3, #32
+ 277              		.loc 1 63 43
+ 278 0020 0B43     		orrs	r3, r3, r1
+ 279              		.loc 1 63 14
+ 280 0022 0449     		ldr	r1, .L13
+ 281 0024 1343     		orrs	r3, r3, r2
+ 282 0026 8B61     		str	r3, [r1, #24]
+  64:Core/Source/main.c **** }
+ 283              		.loc 1 64 1
+ 284 0028 00BF     		nop
+ARM GAS  /tmp/ccx3VPer.s 			page 7
+
+
+ 285 002a 0C37     		adds	r7, r7, #12
+ 286              	.LCFI13:
+ 287              		.cfi_def_cfa_offset 4
+ 288 002c BD46     		mov	sp, r7
+ 289              	.LCFI14:
+ 290              		.cfi_def_cfa_register 13
+ 291              		@ sp needed
+ 292 002e 5DF8047B 		ldr	r7, [sp], #4
+ 293              	.LCFI15:
+ 294              		.cfi_restore 7
+ 295              		.cfi_def_cfa_offset 0
+ 296 0032 7047     		bx	lr
+ 297              	.L14:
+ 298              		.align	2
+ 299              	.L13:
+ 300 0034 00000240 		.word	1073872896
+ 301              		.cfi_endproc
+ 302              	.LFE137:
+ 304              		.section	.text.DelayMS,"ax",%progbits
+ 305              		.align	1
+ 306              		.syntax unified
+ 307              		.thumb
+ 308              		.thumb_func
+ 310              	DelayMS:
+ 311              	.LFB138:
+  65:Core/Source/main.c **** 
+  66:Core/Source/main.c **** static void DelayMS(uint32_t period)
+  67:Core/Source/main.c **** {
+ 312              		.loc 1 67 1
+ 313              		.cfi_startproc
+ 314              		@ args = 0, pretend = 0, frame = 16
+ 315              		@ frame_needed = 1, uses_anonymous_args = 0
+ 316              		@ link register save eliminated.
+ 317 0000 80B4     		push	{r7}
+ 318              	.LCFI16:
+ 319              		.cfi_def_cfa_offset 4
+ 320              		.cfi_offset 7, -4
+ 321 0002 85B0     		sub	sp, sp, #20
+ 322              	.LCFI17:
+ 323              		.cfi_def_cfa_offset 24
+ 324 0004 00AF     		add	r7, sp, #0
+ 325              	.LCFI18:
+ 326              		.cfi_def_cfa_register 7
+ 327 0006 7860     		str	r0, [r7, #4]
+  68:Core/Source/main.c **** 	uint32_t time = 1000 * period;
+ 328              		.loc 1 68 11
+ 329 0008 7B68     		ldr	r3, [r7, #4]
+ 330 000a 4FF47A72 		mov	r2, #1000
+ 331 000e 02FB03F3 		mul	r3, r2, r3
+ 332 0012 FB60     		str	r3, [r7, #12]
+  69:Core/Source/main.c **** 	while(time--);
+ 333              		.loc 1 69 7
+ 334 0014 00BF     		nop
+ 335              	.L16:
+ 336              		.loc 1 69 12 discriminator 1
+ 337 0016 FB68     		ldr	r3, [r7, #12]
+ 338 0018 5A1E     		subs	r2, r3, #1
+ARM GAS  /tmp/ccx3VPer.s 			page 8
+
+
+ 339 001a FA60     		str	r2, [r7, #12]
+ 340              		.loc 1 69 7 discriminator 1
+ 341 001c 002B     		cmp	r3, #0
+ 342 001e FAD1     		bne	.L16
+  70:Core/Source/main.c **** }
+ 343              		.loc 1 70 1
+ 344 0020 00BF     		nop
+ 345 0022 00BF     		nop
+ 346 0024 1437     		adds	r7, r7, #20
+ 347              	.LCFI19:
+ 348              		.cfi_def_cfa_offset 4
+ 349 0026 BD46     		mov	sp, r7
+ 350              	.LCFI20:
+ 351              		.cfi_def_cfa_register 13
+ 352              		@ sp needed
+ 353 0028 5DF8047B 		ldr	r7, [sp], #4
+ 354              	.LCFI21:
+ 355              		.cfi_restore 7
+ 356              		.cfi_def_cfa_offset 0
+ 357 002c 7047     		bx	lr
+ 358              		.cfi_endproc
+ 359              	.LFE138:
+ 361              		.text
+ 362              	.Letext0:
+ 363              		.file 2 "/home/blackally/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/machine/_default_typ
+ 364              		.file 3 "/home/blackally/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/_stdint.h"
+ 365              		.file 4 "Core/Include/stm32f411xe.h"
+ARM GAS  /tmp/ccx3VPer.s 			page 9
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 main.c
+     /tmp/ccx3VPer.s:20     .text.main:0000000000000000 $t
+     /tmp/ccx3VPer.s:26     .text.main:0000000000000000 main
+     /tmp/ccx3VPer.s:62     .text.SystemClock_Config:0000000000000000 SystemClock_Config
+     /tmp/ccx3VPer.s:192    .text.GPIO_Config:0000000000000000 GPIO_Config
+     /tmp/ccx3VPer.s:243    .text.Toggle_Led:0000000000000000 Toggle_Led
+     /tmp/ccx3VPer.s:310    .text.DelayMS:0000000000000000 DelayMS
+     /tmp/ccx3VPer.s:57     .text.SystemClock_Config:0000000000000000 $t
+     /tmp/ccx3VPer.s:180    .text.SystemClock_Config:00000000000000b0 $d
+     /tmp/ccx3VPer.s:187    .text.GPIO_Config:0000000000000000 $t
+     /tmp/ccx3VPer.s:232    .text.GPIO_Config:0000000000000028 $d
+     /tmp/ccx3VPer.s:238    .text.Toggle_Led:0000000000000000 $t
+     /tmp/ccx3VPer.s:300    .text.Toggle_Led:0000000000000034 $d
+     /tmp/ccx3VPer.s:305    .text.DelayMS:0000000000000000 $t
+
+NO UNDEFINED SYMBOLS
