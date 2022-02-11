@@ -1,0 +1,123 @@
+
+Discarded input sections
+
+ .text          0x0000000000000000        0x0 main.o
+ .data          0x0000000000000000        0x0 main.o
+ .bss           0x0000000000000000        0x0 main.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+FLASH            0x0000000008000000 0x0000000000080000 xr
+RAM              0x0000000020000000 0x0000000000020000 xrw
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+LOAD main.o
+START GROUP
+LOAD /home/blackally/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/libgcc.a
+LOAD /home/blackally/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a
+END GROUP
+START GROUP
+LOAD /home/blackally/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/libgcc.a
+LOAD /home/blackally/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a
+LOAD /home/blackally/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libnosys.a
+END GROUP
+
+.text           0x0000000008000000      0x200
+ *(.isr_vector)
+ .isr_vector    0x0000000008000000       0x40 main.o
+                0x0000000008000000                vector_table
+ *(.text*)
+ .text.Reset_Handler
+                0x0000000008000040        0xc main.o
+                0x0000000008000040                Reset_Handler
+ .text._init_data
+                0x000000000800004c       0x5c main.o
+                0x000000000800004c                _init_data
+ .text.Default_Handler
+                0x00000000080000a8        0x2 main.o
+                0x00000000080000a8                Default_Handler
+ .text.main     0x00000000080000aa       0x1a main.o
+                0x00000000080000aa                main
+ .text.SystemClock_Config
+                0x00000000080000c4       0xb8 main.o
+ .text.GPIO_Config
+                0x000000000800017c       0x34 main.o
+ .text.Toggle_Led
+                0x00000000080001b0       0x34 main.o
+ .text.Button_Pressed
+                0x00000000080001e4       0x1c main.o
+ *(.rodata*)
+                0x0000000008000200                _etext = ALIGN (0x4)
+
+.glue_7         0x0000000008000200        0x0
+ .glue_7        0x0000000008000200        0x0 linker stubs
+
+.glue_7t        0x0000000008000200        0x0
+ .glue_7t       0x0000000008000200        0x0 linker stubs
+
+.vfp11_veneer   0x0000000008000200        0x0
+ .vfp11_veneer  0x0000000008000200        0x0 linker stubs
+
+.v4_bx          0x0000000008000200        0x0
+ .v4_bx         0x0000000008000200        0x0 linker stubs
+
+.iplt           0x0000000008000200        0x0
+ .iplt          0x0000000008000200        0x0 main.o
+
+.rel.dyn        0x0000000008000200        0x0
+ .rel.iplt      0x0000000008000200        0x0 main.o
+
+.data           0x0000000020000000        0x0
+                0x0000000020000000                _sdata = .
+ *(vtable)
+ *(.data*)
+                0x0000000020000000                . = ALIGN (0x4)
+                0x0000000020000000                _edata = .
+
+.igot.plt       0x0000000020000000        0x0
+ .igot.plt      0x0000000020000000        0x0 main.o
+
+.bss            0x0000000020000000        0x0
+                0x0000000020000000                . = ALIGN (0x4)
+                0x0000000020000000                _sbss = .
+ *(.bss*)
+                0x0000000020000000                . = ALIGN (0x4)
+                0x0000000020000000                _ebss = .
+                0x0000000020020000                _estack = (ORIGIN (RAM) + LENGTH (RAM))
+OUTPUT(minial_button.elf elf32-littlearm)
+LOAD linker stubs
+
+.debug_info     0x0000000000000000      0x1e7
+ .debug_info    0x0000000000000000      0x1e7 main.o
+
+.debug_abbrev   0x0000000000000000      0x151
+ .debug_abbrev  0x0000000000000000      0x151 main.o
+
+.debug_aranges  0x0000000000000000       0x58
+ .debug_aranges
+                0x0000000000000000       0x58 main.o
+
+.debug_ranges   0x0000000000000000       0x48
+ .debug_ranges  0x0000000000000000       0x48 main.o
+
+.debug_line     0x0000000000000000      0x257
+ .debug_line    0x0000000000000000      0x257 main.o
+
+.debug_str      0x0000000000000000      0x1f6
+ .debug_str     0x0000000000000000      0x1f6 main.o
+                                        0x233 (size before relaxing)
+
+.comment        0x0000000000000000       0x49
+ .comment       0x0000000000000000       0x49 main.o
+                                         0x4a (size before relaxing)
+
+.ARM.attributes
+                0x0000000000000000       0x2e
+ .ARM.attributes
+                0x0000000000000000       0x2e main.o
+
+.debug_frame    0x0000000000000000       0xb0
+ .debug_frame   0x0000000000000000       0xb0 main.o
